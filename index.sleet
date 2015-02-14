@@ -1,0 +1,13 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        title Riot & Sleetjs • TodoMVC
+        link(rel='stylesheet' href='bower_components/todomvc-common/base.css')
+        link(rel='stylesheet' href='bower_components/todomvc-app-css/index.css')
+    body
+        todo
+        script(src='bower_components/riot/riot.min.js')
+        script(src='app/store.js')
+        script(src='app/todo.js')
+        script(type='text/javascript'): coffee(bare=true) riot.mount 'todo'
