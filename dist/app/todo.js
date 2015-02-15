@@ -38,7 +38,7 @@ this.toggleTodo = (function(_this) {
   };
 })(this);
 
-this.on('update', (function(_this) {
+this.on('updated', (function(_this) {
   return function() {
     if (_this.editing) {
       return _this.editor.focus();

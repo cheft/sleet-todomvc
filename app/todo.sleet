@@ -21,7 +21,7 @@ item
             @todo.completed = !@todo.completed
             todoTag.trigger 'save'
             true
-        @on 'update', =>  @editor.focus() if @editing
+        @on 'updated', =>  @editor.focus() if @editing
 todo
     section#todoapp
         header#header

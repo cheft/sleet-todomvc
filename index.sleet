@@ -7,7 +7,7 @@ html(data-framework='riotjs')
         link(rel='stylesheet' href='/bower_components/todomvc-app-css/index.css')
     body
         todo
-        script(src='/bower_components/riot/riot.min.js')
+        script(src='/bower_components/riotjs/riot.min.js')
         script(src='/dist/app/store.js')
         script(src='/dist/app/todo.js')
         script(type='text/javascript'): coffee(bare=true) riot.mount 'todo'

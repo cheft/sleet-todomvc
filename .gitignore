@@ -1,5 +1,7 @@
 bower_components
 node_modules
+npm-debug.log
+dist
 app/*.js
 app/*.tag
 index.html
