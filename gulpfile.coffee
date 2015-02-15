@@ -25,11 +25,10 @@ gulp.task 'build', ->
 
     gulp.src('app/*.sleet')
         .pipe(sleet({ext: 'tag'}))
-        .pipe(riot({type: 'coffeescript'}))
+        .pipe(riot({type: 'none'}))
         # .pipe(concat('all.js'))
-        # .pipe(uglify())
+        .pipe(uglify())
         .pipe(gulp.dest('./dist/app'))
-        .pipe(concat('all.js'))
         # .pipe(rename('all.min.js'))
         # .pipe(uglify())
         # .pipe(gulp.dest('./dist'));

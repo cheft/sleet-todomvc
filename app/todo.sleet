@@ -5,23 +5,23 @@ item
             label(ondblclick='{toEdit}') {todo.title}
             button.destroy(onclick='{toRemove}')
         input.edit(name='editor' onblur='{didEdit}' onkeyup='{didEdit}')
-    |.
+    coffee.
         todoTag = @parent.parent
         @todo = @parent.t
-        @toEdit = (e) =>
+        @toEdit = (e) ->
             @editing = true
             @editor.value = @todo.title
-        @didEdit = (e) =>
+        @didEdit = (e) ->
             if e.which is 13 or e.which is 0 
                 @editing = false
                 @todo.title = value.trim() if (value = e.target.value)
                 todoTag.trigger 'save'
-        @toRemove = => todoTag.trigger 'remove', @todo
-        @toggleTodo = =>
+        @toRemove = -> todoTag.trigger 'remove', @todo
+        @toggleTodo = ->
             @todo.completed = !@todo.completed
             todoTag.trigger 'save'
             true
-        @on 'updated', =>  @editor.focus() if @editing
+        @on 'updated', ->  @editor.focus() if @editing
 todo
     section#todoapp
         header#header
@@ -43,11 +43,11 @@ todo
             a(href='http://github.com/cheft') Cheft
         p Part of
             a(href='http://todomvc.com') TodoMVC
-    |.
+    coffee.
         store = new Store 'sleet-todo'
         @todos = store.fetch()
         @links = [{label: 'All', name: 'all'}, {label: 'Active', name: 'active'}, {label: 'Completed', name: 'completed'}]
-        @didAdd = (e) =>
+        @didAdd = (e) ->
             if e.which is 13 and (value = e.target.value)
                 @todos.push title: value.trim(), completed: false
                 e.target.value = ''
@@ -55,24 +55,24 @@ todo
         @filtered = =>
             return @todos if @activeFilter is 'all'
             @todos.filter (t) => t.completed is (if @activeFilter is 'active' then false else true)         
-        @toggleAll = (e) =>
-            @todos.forEach (t) => t.completed = e.target.checked
+        @toggleAll = (e) ->
+            @todos.forEach (t) -> t.completed = e.target.checked
             @trigger 'save'
             true
-        @removeCompleted = (e) =>
+        @removeCompleted = (e) ->
             @todos = @todos.filter (t) -> !t.completed
             @trigger 'save'
-        @on 'remove', (todo) => @todos.forEach (t) =>
+        @on 'remove', (todo) -> @todos.forEach (t) =>
             @todos.splice(@todos.indexOf(t), 1) if todo is t
             @trigger 'save'
-        @on 'save', =>
+        @on 'save', ->
             store.save @todos
             @update()
-        @on 'update', =>
+        @on 'update', ->
             @remaining = (@todos.filter (t) -> !t.completed).length
             @allDone = @remaining is 0
         riot.route.exec (base, filter) => @activeFilter = filter || 'all'
         riot.route (base, filter) =>
             @activeFilter = filter
             @update()
-        
+            

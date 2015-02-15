@@ -26,6 +26,6 @@ gulp.task('build', function() {
   return gulp.src('app/*.sleet').pipe(sleet({
     ext: 'tag'
   })).pipe(riot({
-    type: 'coffeescript'
-  })).pipe(gulp.dest('./dist/app')).pipe(concat('all.js'));
+    type: 'none'
+  })).pipe(uglify()).pipe(gulp.dest('./dist/app'));
 });
