@@ -1,1 +1,4 @@
 bower_components
+app/*.js
+app/*.tag
+index.html

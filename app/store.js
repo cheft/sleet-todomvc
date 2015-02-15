@@ -1,12 +1,18 @@
-var STORAGE_KEY, todoStorage;
+var Store;
 
-STORAGE_KEY = 'todo-sleet';
-
-todoStorage = {
-  fetch: function() {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-  },
-  save: function(todos) {
-    return localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+Store = (function() {
+  function Store(key) {
+    this.key = key;
   }
-};
+
+  Store.prototype.fetch = function() {
+    return JSON.parse(localStorage.getItem(this.key) || '[]');
+  };
+
+  Store.prototype.save = function(data) {
+    return localStorage.setItem(this.key, JSON.stringify(data));
+  };
+
+  return Store;
+
+})();

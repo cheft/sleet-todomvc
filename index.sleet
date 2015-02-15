@@ -1,5 +1,5 @@
 doctype html
-html
+html(data-framework='riotjs')
     head
         meta(charset='utf-8')
         title Riot & Sleetjs • TodoMVC
@@ -11,3 +11,4 @@ html
         script(src='app/store.js')
         script(src='app/todo.js')
         script(type='text/javascript'): coffee(bare=true) riot.mount 'todo'
+        script(src='//www.google-analytics.com/ga.js')

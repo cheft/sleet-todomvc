@@ -1,5 +1,4 @@
-STORAGE_KEY = 'todo-sleet'
-
-todoStorage =
-    fetch: -> JSON.parse localStorage.getItem(STORAGE_KEY) || '[]'
-    save: (todos) -> localStorage.setItem STORAGE_KEY, JSON.stringify(todos)
+class Store
+    constructor: (@key) ->
+    fetch: -> JSON.parse localStorage.getItem(@key) || '[]'
+    save: (data) -> localStorage.setItem @key, JSON.stringify(data)
