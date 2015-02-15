@@ -1,10 +1,10 @@
-var coffee, concat, gulp, riot, sleet, uglify;
+var coffee, config, gulp, riot, server, sleet, uglify;
 
 gulp = require('gulp');
 
 uglify = require('gulp-uglify');
 
-concat = require('gulp-concat');
+server = require('gulp-server-livereload');
 
 coffee = require('gulp-coffee');
 
@@ -12,20 +12,47 @@ riot = require('gulp-riot');
 
 sleet = require('gulp-sleet');
 
-gulp.task('serve');
+config = {
+  index: 'index.sleet',
+  coffee: 'app/*.coffee',
+  sleet: 'app/*.sleet',
+  indexDist: 'dist',
+  appDist: 'dist/app',
+  lib: ['bower_components/todomvc-common/base.css', 'bower_components/todomvc-app-css/index.css', 'bower_components/riotjs/riot.js'],
+  libDist: 'dist/lib'
+};
 
-gulp.task('dev');
+gulp.task('lib', function() {
+  return gulp.src(config.lib).pipe(gulp.dest(config.libDist));
+});
 
-gulp.task('watch');
-
-gulp.task('build', function() {
-  gulp.src('index.sleet').pipe(sleet()).pipe(gulp.dest('./dist'));
-  gulp.src('app/*.coffee').pipe(coffee({
+gulp.task('build', ['lib'], function() {
+  gulp.src(config.index).pipe(sleet()).pipe(gulp.dest(config.indexDist));
+  gulp.src(config.coffee).pipe(coffee({
     bare: true
-  })).pipe(gulp.dest('./dist/app'));
-  return gulp.src('app/*.sleet').pipe(sleet({
+  })).pipe(gulp.dest(config.appDist));
+  return gulp.src(config.sleet).pipe(sleet({
     ext: 'tag'
   })).pipe(riot({
     type: 'none'
-  })).pipe(uglify()).pipe(gulp.dest('./dist/app'));
+  })).pipe(uglify()).pipe(gulp.dest(config.appDist));
 });
+
+gulp.task('serve', function() {
+  var ser;
+  ser = server({
+    livereload: true,
+    directoryListing: {
+      path: 'dist'
+    },
+    open: true,
+    defaultFile: 'index.html'
+  });
+  return gulp.src(config.indexDist).pipe(ser);
+});
+
+gulp.task('watch', ['serve'], function() {
+  return gulp.watch([config.index, config.coffee, config.sleet], ['build']);
+});
+
+gulp.task('default', ['watch']);
