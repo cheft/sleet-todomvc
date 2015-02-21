@@ -11,4 +11,3 @@ html(data-framework='riotjs')
         script(src='app/store.js')
         script(src='app/todo.js')
         script(type='text/javascript'): coffee(bare=true) riot.mount 'todo'
-        script(src='//www.google-analytics.com/ga.js')
