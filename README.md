@@ -7,14 +7,14 @@ Sleetjs is a litte language that compiles into HTML
 ## [riot](https://github.com/muut/riotjs)
 A React- like, 2.5KB user interface library 
 
-## code structure
+## code structure, less than 100 lines of code
 
     -app
-      -store.coffee
-      -todo.sleet
-    -index.html
+      -store.coffee       (4)
+      -todo.sleet         (77)
+    -index.sleet          (13)
 
-## run
+## run, see [demo](http://cheft.cn/todomvc)
 
     npm install
     bower install
